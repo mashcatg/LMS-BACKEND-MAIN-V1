@@ -1,0 +1,5 @@
+[16-Oct-2024 08:00:04 UTC] PHP Warning:  Undefined variable $pdo in /home/ennovatc/public_html/lms-backend/student-panel/enrollments/fetch_enrollments.php on line 22
+[16-Oct-2024 08:00:04 UTC] PHP Fatal error:  Uncaught Error: Call to a member function prepare() on null in /home/ennovatc/public_html/lms-backend/student-panel/enrollments/fetch_enrollments.php:22
+Stack trace:
+#0 {main}
+  thrown in /home/ennovatc/public_html/lms-backend/student-panel/enrollments/fetch_enrollments.php on line 22

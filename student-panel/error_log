@@ -1,0 +1,72 @@
+[17-Nov-2024 13:12:30 UTC] PHP Warning:  include(../../db.php): Failed to open stream: No such file or directory in /home/ennovatc/youthsthought.com/lms-backend/student-panel/student-auth/check_auth_backend.php on line 12
+[17-Nov-2024 13:12:30 UTC] PHP Warning:  include(../../db.php): Failed to open stream: No such file or directory in /home/ennovatc/youthsthought.com/lms-backend/student-panel/student-auth/check_auth_backend.php on line 12
+[17-Nov-2024 13:12:30 UTC] PHP Warning:  include(): Failed opening '../../db.php' for inclusion (include_path='.:/opt/cpanel/ea-php81/root/usr/share/pear') in /home/ennovatc/youthsthought.com/lms-backend/student-panel/student-auth/check_auth_backend.php on line 12
+[17-Nov-2024 13:12:30 UTC] PHP Warning:  Undefined variable $conn in /home/ennovatc/youthsthought.com/lms-backend/student-panel/student-auth/check_auth_backend.php on line 23
+[17-Nov-2024 13:12:30 UTC] PHP Fatal error:  Uncaught Error: Call to a member function prepare() on null in /home/ennovatc/youthsthought.com/lms-backend/student-panel/student-auth/check_auth_backend.php:23
+Stack trace:
+#0 /home/ennovatc/youthsthought.com/lms-backend/student-panel/dash_widgets.php(11): include()
+#1 {main}
+  thrown in /home/ennovatc/youthsthought.com/lms-backend/student-panel/student-auth/check_auth_backend.php on line 23
+[17-Nov-2024 13:12:30 UTC] PHP Warning:  include(../../db.php): Failed to open stream: No such file or directory in /home/ennovatc/youthsthought.com/lms-backend/student-panel/student-auth/check_auth_backend.php on line 12
+[17-Nov-2024 13:12:30 UTC] PHP Warning:  include(../../db.php): Failed to open stream: No such file or directory in /home/ennovatc/youthsthought.com/lms-backend/student-panel/student-auth/check_auth_backend.php on line 12
+[17-Nov-2024 13:12:30 UTC] PHP Warning:  include(): Failed opening '../../db.php' for inclusion (include_path='.:/opt/cpanel/ea-php81/root/usr/share/pear') in /home/ennovatc/youthsthought.com/lms-backend/student-panel/student-auth/check_auth_backend.php on line 12
+[17-Nov-2024 13:12:30 UTC] PHP Warning:  Undefined variable $conn in /home/ennovatc/youthsthought.com/lms-backend/student-panel/student-auth/check_auth_backend.php on line 23
+[17-Nov-2024 13:12:30 UTC] PHP Fatal error:  Uncaught Error: Call to a member function prepare() on null in /home/ennovatc/youthsthought.com/lms-backend/student-panel/student-auth/check_auth_backend.php:23
+Stack trace:
+#0 /home/ennovatc/youthsthought.com/lms-backend/student-panel/dash_widgets.php(11): include()
+#1 {main}
+  thrown in /home/ennovatc/youthsthought.com/lms-backend/student-panel/student-auth/check_auth_backend.php on line 23
+[17-Nov-2024 13:12:31 UTC] PHP Warning:  include(../../db.php): Failed to open stream: No such file or directory in /home/ennovatc/youthsthought.com/lms-backend/student-panel/student-auth/check_auth_backend.php on line 12
+[17-Nov-2024 13:12:31 UTC] PHP Warning:  include(../../db.php): Failed to open stream: No such file or directory in /home/ennovatc/youthsthought.com/lms-backend/student-panel/student-auth/check_auth_backend.php on line 12
+[17-Nov-2024 13:12:31 UTC] PHP Warning:  include(): Failed opening '../../db.php' for inclusion (include_path='.:/opt/cpanel/ea-php81/root/usr/share/pear') in /home/ennovatc/youthsthought.com/lms-backend/student-panel/student-auth/check_auth_backend.php on line 12
+[17-Nov-2024 13:12:31 UTC] PHP Warning:  Undefined variable $conn in /home/ennovatc/youthsthought.com/lms-backend/student-panel/student-auth/check_auth_backend.php on line 23
+[17-Nov-2024 13:12:31 UTC] PHP Fatal error:  Uncaught Error: Call to a member function prepare() on null in /home/ennovatc/youthsthought.com/lms-backend/student-panel/student-auth/check_auth_backend.php:23
+Stack trace:
+#0 /home/ennovatc/youthsthought.com/lms-backend/student-panel/dash_widgets.php(11): include()
+#1 {main}
+  thrown in /home/ennovatc/youthsthought.com/lms-backend/student-panel/student-auth/check_auth_backend.php on line 23
+[17-Nov-2024 13:12:31 UTC] PHP Warning:  include(../../db.php): Failed to open stream: No such file or directory in /home/ennovatc/youthsthought.com/lms-backend/student-panel/student-auth/check_auth_backend.php on line 12
+[17-Nov-2024 13:12:31 UTC] PHP Warning:  include(../../db.php): Failed to open stream: No such file or directory in /home/ennovatc/youthsthought.com/lms-backend/student-panel/student-auth/check_auth_backend.php on line 12
+[17-Nov-2024 13:12:31 UTC] PHP Warning:  include(): Failed opening '../../db.php' for inclusion (include_path='.:/opt/cpanel/ea-php81/root/usr/share/pear') in /home/ennovatc/youthsthought.com/lms-backend/student-panel/student-auth/check_auth_backend.php on line 12
+[17-Nov-2024 13:12:31 UTC] PHP Warning:  Undefined variable $conn in /home/ennovatc/youthsthought.com/lms-backend/student-panel/student-auth/check_auth_backend.php on line 23
+[17-Nov-2024 13:12:31 UTC] PHP Fatal error:  Uncaught Error: Call to a member function prepare() on null in /home/ennovatc/youthsthought.com/lms-backend/student-panel/student-auth/check_auth_backend.php:23
+Stack trace:
+#0 /home/ennovatc/youthsthought.com/lms-backend/student-panel/dash_widgets.php(11): include()
+#1 {main}
+  thrown in /home/ennovatc/youthsthought.com/lms-backend/student-panel/student-auth/check_auth_backend.php on line 23
+[17-Nov-2024 13:13:14 UTC] PHP Warning:  include(../../db.php): Failed to open stream: No such file or directory in /home/ennovatc/youthsthought.com/lms-backend/student-panel/student-auth/check_auth_backend.php on line 12
+[17-Nov-2024 13:13:14 UTC] PHP Warning:  include(../../db.php): Failed to open stream: No such file or directory in /home/ennovatc/youthsthought.com/lms-backend/student-panel/student-auth/check_auth_backend.php on line 12
+[17-Nov-2024 13:13:14 UTC] PHP Warning:  include(): Failed opening '../../db.php' for inclusion (include_path='.:/opt/cpanel/ea-php81/root/usr/share/pear') in /home/ennovatc/youthsthought.com/lms-backend/student-panel/student-auth/check_auth_backend.php on line 12
+[17-Nov-2024 13:13:14 UTC] PHP Warning:  Undefined variable $conn in /home/ennovatc/youthsthought.com/lms-backend/student-panel/student-auth/check_auth_backend.php on line 23
+[17-Nov-2024 13:13:14 UTC] PHP Fatal error:  Uncaught Error: Call to a member function prepare() on null in /home/ennovatc/youthsthought.com/lms-backend/student-panel/student-auth/check_auth_backend.php:23
+Stack trace:
+#0 /home/ennovatc/youthsthought.com/lms-backend/student-panel/dash_widgets.php(11): include()
+#1 {main}
+  thrown in /home/ennovatc/youthsthought.com/lms-backend/student-panel/student-auth/check_auth_backend.php on line 23
+[17-Nov-2024 13:13:14 UTC] PHP Warning:  include(../../db.php): Failed to open stream: No such file or directory in /home/ennovatc/youthsthought.com/lms-backend/student-panel/student-auth/check_auth_backend.php on line 12
+[17-Nov-2024 13:13:14 UTC] PHP Warning:  include(../../db.php): Failed to open stream: No such file or directory in /home/ennovatc/youthsthought.com/lms-backend/student-panel/student-auth/check_auth_backend.php on line 12
+[17-Nov-2024 13:13:14 UTC] PHP Warning:  include(): Failed opening '../../db.php' for inclusion (include_path='.:/opt/cpanel/ea-php81/root/usr/share/pear') in /home/ennovatc/youthsthought.com/lms-backend/student-panel/student-auth/check_auth_backend.php on line 12
+[17-Nov-2024 13:13:14 UTC] PHP Warning:  Undefined variable $conn in /home/ennovatc/youthsthought.com/lms-backend/student-panel/student-auth/check_auth_backend.php on line 23
+[17-Nov-2024 13:13:14 UTC] PHP Fatal error:  Uncaught Error: Call to a member function prepare() on null in /home/ennovatc/youthsthought.com/lms-backend/student-panel/student-auth/check_auth_backend.php:23
+Stack trace:
+#0 /home/ennovatc/youthsthought.com/lms-backend/student-panel/dash_widgets.php(11): include()
+#1 {main}
+  thrown in /home/ennovatc/youthsthought.com/lms-backend/student-panel/student-auth/check_auth_backend.php on line 23
+[17-Nov-2024 13:13:15 UTC] PHP Warning:  include(../../db.php): Failed to open stream: No such file or directory in /home/ennovatc/youthsthought.com/lms-backend/student-panel/student-auth/check_auth_backend.php on line 12
+[17-Nov-2024 13:13:15 UTC] PHP Warning:  include(../../db.php): Failed to open stream: No such file or directory in /home/ennovatc/youthsthought.com/lms-backend/student-panel/student-auth/check_auth_backend.php on line 12
+[17-Nov-2024 13:13:15 UTC] PHP Warning:  include(): Failed opening '../../db.php' for inclusion (include_path='.:/opt/cpanel/ea-php81/root/usr/share/pear') in /home/ennovatc/youthsthought.com/lms-backend/student-panel/student-auth/check_auth_backend.php on line 12
+[17-Nov-2024 13:13:15 UTC] PHP Warning:  Undefined variable $conn in /home/ennovatc/youthsthought.com/lms-backend/student-panel/student-auth/check_auth_backend.php on line 23
+[17-Nov-2024 13:13:15 UTC] PHP Fatal error:  Uncaught Error: Call to a member function prepare() on null in /home/ennovatc/youthsthought.com/lms-backend/student-panel/student-auth/check_auth_backend.php:23
+Stack trace:
+#0 /home/ennovatc/youthsthought.com/lms-backend/student-panel/dash_widgets.php(11): include()
+#1 {main}
+  thrown in /home/ennovatc/youthsthought.com/lms-backend/student-panel/student-auth/check_auth_backend.php on line 23
+[17-Nov-2024 13:13:15 UTC] PHP Warning:  include(../../db.php): Failed to open stream: No such file or directory in /home/ennovatc/youthsthought.com/lms-backend/student-panel/student-auth/check_auth_backend.php on line 12
+[17-Nov-2024 13:13:15 UTC] PHP Warning:  include(../../db.php): Failed to open stream: No such file or directory in /home/ennovatc/youthsthought.com/lms-backend/student-panel/student-auth/check_auth_backend.php on line 12
+[17-Nov-2024 13:13:15 UTC] PHP Warning:  include(): Failed opening '../../db.php' for inclusion (include_path='.:/opt/cpanel/ea-php81/root/usr/share/pear') in /home/ennovatc/youthsthought.com/lms-backend/student-panel/student-auth/check_auth_backend.php on line 12
+[17-Nov-2024 13:13:15 UTC] PHP Warning:  Undefined variable $conn in /home/ennovatc/youthsthought.com/lms-backend/student-panel/student-auth/check_auth_backend.php on line 23
+[17-Nov-2024 13:13:15 UTC] PHP Fatal error:  Uncaught Error: Call to a member function prepare() on null in /home/ennovatc/youthsthought.com/lms-backend/student-panel/student-auth/check_auth_backend.php:23
+Stack trace:
+#0 /home/ennovatc/youthsthought.com/lms-backend/student-panel/dash_widgets.php(11): include()
+#1 {main}
+  thrown in /home/ennovatc/youthsthought.com/lms-backend/student-panel/student-auth/check_auth_backend.php on line 23

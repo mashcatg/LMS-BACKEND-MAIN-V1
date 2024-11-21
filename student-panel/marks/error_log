@@ -1,0 +1,5 @@
+[18-Oct-2024 09:31:03 UTC] PHP Warning:  include(../db.php): Failed to open stream: No such file or directory in /home/ennovatc/public_html/lms-backend/student-panel/marks/fetch_marks.php on line 12
+[18-Oct-2024 09:31:03 UTC] PHP Warning:  include(../db.php): Failed to open stream: No such file or directory in /home/ennovatc/public_html/lms-backend/student-panel/marks/fetch_marks.php on line 12
+[18-Oct-2024 09:31:03 UTC] PHP Warning:  include(): Failed opening '../db.php' for inclusion (include_path='.:/opt/cpanel/ea-php81/root/usr/share/pear') in /home/ennovatc/public_html/lms-backend/student-panel/marks/fetch_marks.php on line 12
+[18-Oct-2024 09:40:49 UTC] PHP Warning:  Undefined array key "exam_id" in /home/ennovatc/public_html/lms-backend/student-panel/marks/fetch_all_marks.php on line 19
+[18-Oct-2024 09:41:16 UTC] PHP Warning:  Undefined array key "exam_id" in /home/ennovatc/public_html/lms-backend/student-panel/marks/fetch_all_marks.php on line 19

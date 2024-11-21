@@ -1,0 +1,2 @@
+[18-Oct-2024 02:45:29 UTC] PHP Warning:  Undefined variable $student_id in /home/ennovatc/public_html/lms-backend/student-panel/cards/fetch_cards.php on line 23
+[18-Oct-2024 02:51:47 UTC] PHP Notice:  session_start(): Ignoring session_start() because a session is already active in /home/ennovatc/public_html/lms-backend/student-panel/student-auth/check_auth_backend.php on line 11
