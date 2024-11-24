@@ -2,7 +2,7 @@
 ini_set('display_errors', 0);
 error_reporting(0);
 
-header("Access-Control-Allow-Origin: http://localhost:3000");
+header("Access-Control-Allow-Origin: http://lms.ennovat.com:3002");
 header("Access-Control-Allow-Methods: POST, OPTIONS");
 header("Access-Control-Allow-Headers: Content-Type, Authorization");
 header("Access-Control-Allow-Credentials: true");

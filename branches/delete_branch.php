@@ -3,7 +3,7 @@ ini_set('display_errors', 0);
 error_reporting(0);
 
 // Allow CORS for the specific origin
-header("Access-Control-Allow-Origin: http://localhost:3000"); // Your front-end origin
+header("Access-Control-Allow-Origin: http://lms.ennovat.com:3002"); // Your front-end origin
 
 // Allow the methods needed (GET, POST, DELETE, OPTIONS)
 header("Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS");

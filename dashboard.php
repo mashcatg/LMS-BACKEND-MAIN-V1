@@ -1,6 +1,6 @@
 <?php
 // Required headers for CORS and content type
-header("Access-Control-Allow-Origin: http://localhost:3000");
+header("Access-Control-Allow-Origin: http://lms.ennovat.com:3002");
 header("Content-Type: application/json");
 header("Access-Control-Allow-Headers: Content-Type, Authorization");
 header("Access-Control-Allow-Credentials: true");
