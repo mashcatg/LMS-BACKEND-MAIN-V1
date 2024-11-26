@@ -38,18 +38,18 @@ try {
         $faviconTmpPath = $_FILES['favicon']['tmp_name'];
         $faviconFilename = uniqid('favicon_', true) . '.' . pathinfo($_FILES['favicon']['name'], PATHINFO_EXTENSION);
         $faviconPath = '../uploads/' . $faviconFilename;
-        $saveFaviconPath = 'uploads/' . $faviconFilename;
+        $saveFaviconPath = 'http://lms.ennovat.com/lms-admin/uploads/' . $faviconFilename;
         move_uploaded_file($faviconTmpPath, $faviconPath);
     } else {
-        $faviconPath = $currentImages['favicon']; // Keep current favicon if no new file
+        $saveFaviconPath = $currentImages['favicon']; // Keep current favicon if no new file
     }
 
     // Check if logo file is uploaded
     if (isset($_FILES['logo']) && $_FILES['logo']['error'] === UPLOAD_ERR_OK) {
         $logoTmpPath = $_FILES['logo']['tmp_name'];
         $logoFilename = uniqid('logo_', true) . '.' . pathinfo($_FILES['logo']['name'], PATHINFO_EXTENSION);
-        $logoPath = '../uploads/' . $logoFilename;
-        $saveLogoPath = 'uploads/' . $logoFilename;
+        $logoPath = $_SERVER['DOCUMENT_ROOT'] . 'uploads/' . $logoFilename;
+        $saveLogoPath = 'http://lms.ennovat.com/lms-admin/uploads/' . $logoFilename;
         move_uploaded_file($logoTmpPath, $logoPath);
     } else {
         $saveLogoPath = $currentImages['logo']; // Keep current logo if no new file
