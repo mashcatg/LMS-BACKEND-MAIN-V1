@@ -29,38 +29,43 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $active_months = $_POST['active_months'];
     $accepting_admission = $_POST['accepting_admission'];
 
+    // Fetch existing course banner (if any) before checking the file upload
+    $sql = "SELECT course_banner FROM courses WHERE course_id = ?";
+    $stmt = $conn->prepare($sql);
+    $stmt->execute([$course_id]);
+    $existingCourseBanner = $stmt->fetchColumn();
+
     // Handle file upload for course banner
-    $course_banner = '';
+    $course_banner = $existingCourseBanner; // Default to the existing banner URL
     if (isset($_FILES['course_banner']) && $_FILES['course_banner']['error'] === UPLOAD_ERR_OK) {
         $upload_dir = '../uploads/course_banners/';
         $file_name = uniqid() . '_' . $_FILES['course_banner']['name'];
         $upload_path = $upload_dir . $file_name;
-
+        $filePathToSave = 'http://lms.ennovat.com/lms-admin/uploads/' . basename($file_name);
+        
         if (move_uploaded_file($_FILES['course_banner']['tmp_name'], $upload_path)) {
-            $course_banner = $file_name;
+            $course_banner = $filePathToSave; // Update to the new file URL
         }
     }
 
     try {
-        $sql = "UPDATE courses SET course_name = ?, course_description = ?, fee_type = ?, course_fee = ?, discounted_amount = ?, active_months = ?, accepting_admission = ?";
-        $params = [$course_name, $course_description, $fee_type, $course_fee, $discounted_amount, $active_months, $accepting_admission];
+        // Prepare the update query
+        $sql = "UPDATE courses SET course_name = ?, course_banner = ?, course_description = ?, fee_type = ?, course_fee = ?, discounted_amount = ?, active_months = ?, accepting_admission = ? WHERE course_id = ?";
+        $params = [
+            $course_name, 
+            $course_banner, // This will either be the new file path or the old one
+            $course_description, 
+            $fee_type, 
+            $course_fee, 
+            $discounted_amount, 
+            $active_months, 
+            $accepting_admission, 
+            $course_id
+        ];
 
-        if ($course_banner) {
-            $sql .= ", course_banner = ?";
-            $params[] = $course_banner;
-        }
-
-        $sql .= " WHERE course_id = ?";
-        $params[] = $course_id;
-
+        // Execute the update query
         $stmt = $conn->prepare($sql);
         $stmt->execute($params);
-
-       
-
-        if ($course_banner) {
-            $updated_course['course_banner'] = $course_banner;
-        }
 
         echo json_encode(['success' => true, 'message' => 'Course updated successfully']);
     } catch (Exception $e) {
