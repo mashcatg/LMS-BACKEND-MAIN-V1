@@ -43,7 +43,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             exit();
         }
     }
-
+$admin_id = $_SESSION['admin_id'];
     // Prepare the rest of the data
     $student_name = $_POST['student_name'] ?? null;
     $student_number = $_POST['student_number'] ?? null;
@@ -72,8 +72,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     try {
         // Insert student data into the database
-        $stmt = $conn->prepare("INSERT INTO students (student_name, student_number, student_institution, student_date_of_birth, father_name, father_number, mother_name, mother_number, student_address, service_id, student_image, student_password) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
-        $stmt->execute([$student_name, $student_number, $student_institution, $student_date_of_birth, $father_name, $father_number, $mother_name, $mother_number, $student_address, $service_id, $uploadedImageName, $hashed_password]);
+        $stmt = $conn->prepare("INSERT INTO students (student_name, student_number, student_institution, student_date_of_birth, father_name, father_number, mother_name, mother_number, student_address, service_id, student_image, student_password, created_by) VALUES (?,?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+        $stmt->execute([$student_name, $student_number, $student_institution, $student_date_of_birth, $father_name, $father_number, $mother_name, $mother_number, $student_address, $service_id, $uploadedImageName, $hashed_password, $admin_id]);
 
         $student_id = $conn->lastInsertId();
 
