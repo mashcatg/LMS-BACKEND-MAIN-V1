@@ -30,8 +30,8 @@ try {
     $stmt->execute([$service_id]);
     $settings = $stmt->fetch(PDO::FETCH_ASSOC);
 
-    // Return settings as a JSON response
-    echo json_encode($settings);
+    // Return settings as a JSON response with success = true
+     echo json_encode(['success' => true, 'settings' => $settings]);
 } catch (Exception $e) {
     echo json_encode(['success' => false, 'message' => 'Error fetching settings: ' . $e->getMessage()]);
 }
