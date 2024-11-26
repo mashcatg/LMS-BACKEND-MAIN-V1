@@ -39,15 +39,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $file_tmp_path = $_FILES['file']['tmp_name'];
             $file_name = $_FILES['file']['name'];
             $file_store_path = "../uploads/" . basename($file_name); 
-
+            $filePathToSave = 'http://lms.ennovat.com/lms-admin/uploads/'.basename($file_name);
             // Move the uploaded file to the desired directory
             if (move_uploaded_file($file_tmp_path, $file_store_path)) {
                 $file_address = $file_store_path;
 
                 // Prepare insert statement for routine
-                $stmt = $conn->prepare("INSERT INTO routine (routine_name, file_address, course_id, batch_id, created_by, created_at, service_id) VALUES (:routine_name, :file_address, :course_id, :batch_id, :created_by, :created_at, :service_id)");
+                $stmt = $conn->prepare("INSERT INTO routine (routine_name, file_address, course_id, batch_id, created_by, created_at, service_id) VALUES (:routine_name, :filePathToSave, :course_id, :batch_id, :created_by, :created_at, :service_id)");
                 $stmt->bindParam(':routine_name', $routine_name);
-                $stmt->bindParam(':file_address', $file_address);
+                $stmt->bindParam(':filePathToSave', $filePathToSave);
                 $stmt->bindParam(':course_id', $course_id);
                 $stmt->bindParam(':batch_id', $batch_id);
                 $stmt->bindParam(':created_by', $created_by);
