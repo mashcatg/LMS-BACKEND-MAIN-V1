@@ -5,7 +5,6 @@ ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
-// Allow cross-origin requests from frontend on localhost:3000
 header("Access-Control-Allow-Origin: http://lms.ennovat.com:3002");
 header("Access-Control-Allow-Methods: POST, OPTIONS");
 header("Access-Control-Allow-Headers: Content-Type, Authorization");
@@ -17,7 +16,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
 session_set_cookie_params([
     'lifetime' => 180 * 24 * 60 * 60, // 180 days
     'path' => '/',                     // Available site-wide
-    'domain' => '.youthsthought.com',   // Valid for subdomains of youthsthought.com
+    'domain' => '.ennovat.com',   //valid for subdomains
     'secure' => true,                  // Secure only over HTTPS
     'httponly' => true,                // Make the cookie inaccessible to JavaScript
     'samesite' => 'None',              // Allow cross-site cookie usage
@@ -28,8 +27,8 @@ session_start();
 include 'db.php';
 
 $postData = json_decode(file_get_contents('php://input'), true);
-$currentUrl = "https://enno.ennovat.com/";
-
+$currentUrl = $postData['url'];
+//"https://enno.ennovat.com/"
 if (!$currentUrl) {
     echo json_encode(['error' => 'No URL provided']);
     exit;
