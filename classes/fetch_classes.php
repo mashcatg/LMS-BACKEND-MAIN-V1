@@ -9,12 +9,16 @@ header("Access-Control-Allow-Origin: http://lms.ennovat.com:3002");
 header("Access-Control-Allow-Methods: POST, GET, OPTIONS");
 header("Access-Control-Allow-Headers: Content-Type, Authorization");
 header("Access-Control-Allow-Credentials: true");
+
 include '../check_auth_backend.php';
+
 // Ensure that authentication is successful
 if ($checkAuthMessage != 'success') {
     echo json_encode(['error' => $checkAuthMessage]);
     exit();
 }
+
+$playlist_id = $_GET['playlist_id'];
 
 if ($_SERVER['REQUEST_METHOD'] === 'GET') {
     // Check authentication
@@ -25,8 +29,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
 
     try {
         $service_id = $_SESSION['service_id'];
-        $sql = "SELECT * FROM classes WHERE service_id = :service_id";
+
+        // Fix the SQL query to correctly fetch classes based on playlist_id and service_id
+        $sql = "SELECT * FROM classes WHERE playlist_id = :playlist_id AND service_id = :service_id";
         $stmt = $conn->prepare($sql);
+        $stmt->bindParam(':playlist_id', $playlist_id);
         $stmt->bindParam(':service_id', $service_id);
         $stmt->execute();
 
@@ -36,24 +43,27 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
         foreach ($classes as &$class) {
             $note_ids = [];
 
-            // Handle multiple note_ids
-            if (strpos($class['note_id'], ',') !== false) {
-                // Convert comma-separated note_ids to array
-                $note_ids = explode(',', $class['note_id']);
-            } else {
-                // Single note_id
-                $note_ids = [$class['note_id']];
-            }
+            // Check if note_id is not null
+            if (!empty($class['note_id'])) {
+                // Handle multiple note_ids if they are comma-separated
+                if (strpos($class['note_id'], ',') !== false) {
+                    $note_ids = explode(',', $class['note_id']);
+                } else {
+                    $note_ids = [$class['note_id']];
+                }
 
-            // Fetch the note names based on note_ids
-            if (!empty($note_ids)) {
-                $note_ids_placeholder = implode(',', array_fill(0, count($note_ids), '?'));
-                $note_query = "SELECT note_name FROM notes WHERE note_id IN ($note_ids_placeholder)";
-                $note_stmt = $conn->prepare($note_query);
-                $note_stmt->execute($note_ids);
+                // Fetch note names based on note_ids
+                if (!empty($note_ids)) {
+                    $note_ids_placeholder = implode(',', array_fill(0, count($note_ids), '?'));
+                    $note_query = "SELECT note_name FROM notes WHERE note_id IN ($note_ids_placeholder)";
+                    $note_stmt = $conn->prepare($note_query);
+                    $note_stmt->execute($note_ids);
 
-                $notes = $note_stmt->fetchAll(PDO::FETCH_COLUMN); // Fetch only the note_name column
-                $class['note_names'] = $notes;
+                    $notes = $note_stmt->fetchAll(PDO::FETCH_COLUMN); // Fetch only the note_name column
+                    $class['note_names'] = $notes;
+                } else {
+                    $class['note_names'] = [];
+                }
             } else {
                 $class['note_names'] = [];
             }
