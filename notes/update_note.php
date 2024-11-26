@@ -45,7 +45,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $file_tmp_path = $_FILES['file_address']['tmp_name'];
             $file_name = $_FILES['file_address']['name'];
             $file_path = '../uploads/' . basename($file_name);
-
+            $filePathToSave = 'http://lms.ennovat.com/lms-admin/uploads/'.basename($file_name);
             // Move the uploaded file
             if (move_uploaded_file($file_tmp_path, $file_path)) {
                 $file_address = $file_path; // Save the new file path
@@ -55,7 +55,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             }
         } else {
             // Use the existing values if no new file is uploaded
-            $file_address = $currentNote['file_address'];
+            $filePathToSave = $currentNote['file_address'];
         }
 
         // Use existing course and batch IDs if not provided
@@ -63,7 +63,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $batch_ids = !empty($batch_ids) ? $batch_ids : $currentNote['batch_id'];
 
         // Update the note in the database
-        $stmt = $conn->prepare("UPDATE notes SET note_name = :note_name, note_tags = :note_tags, course_id = :course_ids, batch_id = :batch_ids, created_by = :created_by, created_at = :created_at, file_address = :file_address WHERE note_id = :note_id");
+        $stmt = $conn->prepare("UPDATE notes SET note_name = :note_name, note_tags = :note_tags, course_id = :course_ids, batch_id = :batch_ids, created_by = :created_by, created_at = :created_at, file_address = :filePathToSave WHERE note_id = :note_id");
         
         $stmt->bindParam(':note_id', $note_id);
         $stmt->bindParam(':note_name', $note_name);
@@ -72,7 +72,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $stmt->bindParam(':batch_ids', $batch_ids);
         $stmt->bindParam(':created_by', $created_by);
         $stmt->bindParam(':created_at', $created_at);
-        $stmt->bindParam(':file_address', $file_address);
+        $stmt->bindParam(':filePathToSave', $filePathToSave);
 
         if ($stmt->execute()) {
             echo json_encode(['success' => true, 'message' => 'Note updated successfully']);
