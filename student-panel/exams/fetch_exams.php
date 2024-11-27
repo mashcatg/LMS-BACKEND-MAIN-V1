@@ -64,37 +64,30 @@ try {
         ");
         $marksStmt->execute([':exam_id' => $exam_id, ':student_index' => $student_index]);
         $marks = $marksStmt->fetch(PDO::FETCH_ASSOC);
+
+        // If no marks are found, use default values
+        if (!$marks) {
+            $marks = [
+                'mcq_marks' => '-',
+                'cq_marks' => '-',
+                'practical_marks' => '-',
+                'message' => 'Not Attended'
+            ];
+        }
+
+        // Total marks calculated from the 'exams' table
         $total_exam_marks = $exam['mcq_marks'] + $exam['cq_marks'] + $exam['practical_marks'];
-// Now, create the final exam data array, ensuring the total marks are taken from 'exams'
+
+        // Exam data array
         $exam_data = [
             'exam_id' => $exam['exam_id'],
             'exam_name' => $exam['exam_name'],
             'exam_date' => $exam['exam_date'],
-            'total_exam_marks' => $total_exam_marks, 
+            'total_exam_marks' => $total_exam_marks,
             'bonus_marks' => $exam['bonus_marks'],
         ];
-        // If no marks are found, set default values for "Not Attended"
-if (!$marks) {
-    $marksData = [
-        'obtained_mcq' => '-', 
-        'obtained_cq' => '-', 
-        'obtained_practical_marks' => '-', 
-        'message' => 'Not Attended' 
-    ];
-} else {
-    // If marks are found, assign them as obtained marks
-    $marksData = [
-        'obtained_mcq' => $marks['mcq_marks'],  
-        'obtained_cq' => $marks['cq_marks'],    
-        'obtained_practical_marks' => $marks['practical_marks'], 
-        'message' => ''  
-    ];
-}
 
-
-        
-
-        // Merge exam data (total marks) with obtained marks
+        // Merge exam data with marks data
         $exams_with_marks[] = array_merge($exam_data, $marks);
     }
 
