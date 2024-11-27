@@ -2,7 +2,7 @@
 // Connect to the database
 $host = 'localhost';
 $dbname = '';
-$username = 'lms'; 
+$username = 'root'; 
 $password = 'mashPass789!@#';
 
 try {
