@@ -1,9 +1,9 @@
 <?php
 // Connect to the database
 $host = 'localhost';
-$dbname = 'ennovatc_lms';
-$username = 'ennovatc_lms'; 
-$password = 'g3QK5We=aSi_';
+$dbname = '';
+$username = 'lms'; 
+$password = 'mashPass789!@#';
 
 try {
     $conn = new PDO("mysql:host=$host;dbname=$dbname", $username, $password);
