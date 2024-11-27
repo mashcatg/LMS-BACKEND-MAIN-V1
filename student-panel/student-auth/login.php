@@ -18,7 +18,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
 session_set_cookie_params([
     'lifetime' => 180 * 24 * 60 * 60, // 180 days
     'path' => '/',                     // Available site-wide
-    'domain' => '.youthsthought.com',   // Valid for subdomains of youthsthought.com
+    'domain' => '.ennovat.com',   // Valid for subdomains of youthsthought.com
     'secure' => true,                  // Secure only over HTTPS
     'httponly' => true,                // Make the cookie inaccessible to JavaScript
     'samesite' => 'None',              // Allow cross-site cookie usage
