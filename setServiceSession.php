@@ -5,7 +5,6 @@ ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
-// Allow cross-origin requests from frontend on localhost:3000
 header("Access-Control-Allow-Origin: http://lms.ennovat.com:3002");
 header("Access-Control-Allow-Methods: POST, OPTIONS");
 header("Access-Control-Allow-Headers: Content-Type, Authorization");
@@ -14,22 +13,13 @@ header("Access-Control-Allow-Credentials: true");
 if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
     exit(0);
 }
-session_set_cookie_params([
-    'lifetime' => 180 * 24 * 60 * 60, // 180 days
-    'path' => '/',                     // Available site-wide
-    'domain' => '.youthsthought.com',   // Valid for subdomains of youthsthought.com
-    'secure' => true,                  // Secure only over HTTPS
-    'httponly' => true,                // Make the cookie inaccessible to JavaScript
-    'samesite' => 'None',              // Allow cross-site cookie usage
-]);
-
 // Start the session after setting cookie parameters
 session_start();
 include 'db.php';
 
 $postData = json_decode(file_get_contents('php://input'), true);
-$currentUrl = "https://enno.ennovat.com/";
-
+$currentUrl = $postData['url'];
+//"https://enno.ennovat.com/"
 if (!$currentUrl) {
     echo json_encode(['error' => 'No URL provided']);
     exit;
@@ -62,17 +52,7 @@ try {
     if ($service && isset($service['service_id'])) {
         // Save the service ID in the session
         $_SESSION['service_id'] = $service['service_id'];
-
-        // Set the service_id cookie with necessary attributes
-        setcookie('service_id', $service['service_id'], [
-            'expires' => time() + (180 * 24 * 60 * 60),  // 180 days
-            'path' => '/',                              // Available site-wide
-            'domain' => '.youthsthought.com',            // Valid for subdomains of youthsthought.com
-            'secure' => true,                           // Secure only over HTTPS
-            'httponly' => true,                         // Make it inaccessible to JavaScript
-            'samesite' => 'None'                        // Allow cross-site cookie usage
-        ]);
-
+setcookie('service_id', $service['service_id'], time() + (180 * 24 * 60 * 60), '/', '', false, true);
         echo json_encode([
             'url' => $currentUrl,
             'subdomain' => $subdomain,

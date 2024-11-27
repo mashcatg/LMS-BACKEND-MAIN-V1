@@ -25,34 +25,35 @@ if (!isset($_SESSION['admin_id'])) {
 $service_id = $_SESSION['service_id'];
 
 try {
-    $faviconPath = null;
-    $logoPath = null;
+    // Default paths for favicon and logo
+    $saveFaviconPath = null;
+    $saveLogoPath = null;
 
-    // Fetch current settings to preserve old image paths if not updated
+    // Fetch current settings to get existing favicon and logo
     $stmt = $conn->prepare("SELECT favicon, logo FROM services WHERE service_id = ?");
     $stmt->execute([$service_id]);
     $currentImages = $stmt->fetch(PDO::FETCH_ASSOC);
 
-    // Check if favicon file is uploaded
+    // Handle favicon upload
     if (isset($_FILES['favicon']) && $_FILES['favicon']['error'] === UPLOAD_ERR_OK) {
         $faviconTmpPath = $_FILES['favicon']['tmp_name'];
         $faviconFilename = uniqid('favicon_', true) . '.' . pathinfo($_FILES['favicon']['name'], PATHINFO_EXTENSION);
         $faviconPath = '../uploads/' . $faviconFilename;
-        $saveFaviconPath = 'uploads/' . $faviconFilename;
+        $saveFaviconPath = 'http://lms.ennovat.com/lms-admin/uploads/' . $faviconFilename;
         move_uploaded_file($faviconTmpPath, $faviconPath);
     } else {
-        $faviconPath = $currentImages['favicon']; // Keep current favicon if no new file
+        $saveFaviconPath = $currentImages['favicon'] ?? null; // Retain existing favicon or keep null
     }
 
-    // Check if logo file is uploaded
+    // Handle logo upload
     if (isset($_FILES['logo']) && $_FILES['logo']['error'] === UPLOAD_ERR_OK) {
         $logoTmpPath = $_FILES['logo']['tmp_name'];
         $logoFilename = uniqid('logo_', true) . '.' . pathinfo($_FILES['logo']['name'], PATHINFO_EXTENSION);
         $logoPath = '../uploads/' . $logoFilename;
-        $saveLogoPath = 'uploads/' . $logoFilename;
+        $saveLogoPath = 'http://lms.ennovat.com/lms-admin/uploads/' . $logoFilename;
         move_uploaded_file($logoTmpPath, $logoPath);
     } else {
-        $saveLogoPath = $currentImages['logo']; // Keep current logo if no new file
+        $saveLogoPath = $currentImages['logo'] ?? null; // Retain existing logo or keep null
     }
 
     // Access the rest of the form data via $_POST
@@ -75,7 +76,7 @@ try {
         accent_color = ?, 
         facebook = ?, 
         instagram = ?, 
-        twitter = ?,
+        twitter = ?, 
         linkedin = ?, 
         youtube = ? 
         WHERE service_id = ?");
@@ -85,8 +86,8 @@ try {
         $siteName,
         $phoneNumber,
         $location,
-        $saveFaviconPath, 
-        $saveLogoPath,    
+        $saveFaviconPath,
+        $saveLogoPath,
         $colors['primary'] ?? null,
         $colors['background'] ?? null,
         $colors['text'] ?? null,

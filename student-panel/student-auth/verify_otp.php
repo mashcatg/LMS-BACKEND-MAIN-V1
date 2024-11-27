@@ -13,14 +13,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
     http_response_code(200);
     exit(0);
 }
-session_set_cookie_params([
-    'lifetime' => 180 * 24 * 60 * 60, // 180 days
-    'path' => '/',                     // Available site-wide
-    'domain' => '.youthsthought.com',   // Valid for subdomains of youthsthought.com
-    'secure' => true,                  // Secure only over HTTPS
-    'httponly' => true,                // Make the cookie inaccessible to JavaScript
-    'samesite' => 'None',              // Allow cross-site cookie usage
-]);
+
 session_start();
 include '../../db.php';
 
@@ -42,7 +35,18 @@ if (!$service_id) {
     echo json_encode(['success' => false, 'message' => 'Service ID is missing or invalid.']);
     exit();
 }
-
+// Normalize phone number
+    if (preg_match('/^01[3-9]\d{8}$/', $student_number)) {
+        // Phone starts with '01'
+        $student_number = '88' . $student_number;
+    } elseif (preg_match('/^1\d{10}$/', $student_number)) {
+        // Phone starts with '1'
+        $student_number = '880' . substr($student_number, 1); // Remove the '1' and prepend '880'
+    } elseif (!preg_match('/^8801[3-9]\d{8}$/', $student_number)) {
+        // Invalid phone number format
+        echo json_encode(['success' => false, 'message' => 'Invalid phone number format.']);
+        exit;
+    }
 try {
     // Fetch student and OTP details
     $stmt = $conn->prepare("SELECT student_id, student_otp, student_otp_expiry_time, student_password FROM students WHERE student_number = ? AND service_id = ?");
@@ -78,15 +82,8 @@ try {
     ");
     $stmt->execute([$student['student_id'], $auth_token, $expiry_date, $service_id]);
 
-    setcookie('student_auth', $auth_token, [
-            'expires' => time() + (180 * 24 * 60 * 60),  // 180 days
-            'path' => '/',                              // Available site-wide
-            'domain' => '.youthsthought.com',            // Valid for subdomains of youthsthought.com
-            'secure' => true,                           // Secure only over HTTPS
-            'httponly' => true,                         // Make it inaccessible to JavaScript
-            'samesite' => 'None'                        // Allow cross-site cookie usage
-        ]);
-    setcookie('student_auth', $auth_token, time() + (180 * 24 * 60 * 60), '/', 'localhost', false, true);  // Set cookie for localhost
+    
+    setcookie('student_auth', $auth_token, time() + (180 * 24 * 60 * 60), '/', '', false, true);
 
     // Fetch additional enrollment information
     $stmt = $conn->prepare("

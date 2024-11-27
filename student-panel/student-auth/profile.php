@@ -18,8 +18,8 @@ if ($checkAuthMessage != 'success') {
 }
 
 // Get student_id and service_id from session
-$student_id = $_SESSION['student_id'] ?? '1';
-$service_id = $_SESSION['service_id'] ?? '61545';
+$student_id = $_SESSION['student_id'];
+$service_id = $_SESSION['service_id'];
 
 if (!$student_id || !$service_id) {
     echo json_encode(['error' => 'Invalid session']);

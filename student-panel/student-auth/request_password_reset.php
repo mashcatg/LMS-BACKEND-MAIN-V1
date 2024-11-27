@@ -23,7 +23,18 @@ if (empty($student_number)) {
 $otp = rand(100000, 999999);
 // Set OTP expiration time (e.g., 10 minutes from now)
 $otp_expiry_time = date('Y-m-d H:i:s', strtotime('+10 minutes'));
-
+// Normalize phone number
+    if (preg_match('/^01[3-9]\d{8}$/', $student_number)) {
+        // Phone starts with '01'
+        $student_number = '88' . $student_number;
+    } elseif (preg_match('/^1\d{10}$/', $student_number)) {
+        // Phone starts with '1'
+        $student_number = '880' . substr($student_number, 1); // Remove the '1' and prepend '880'
+    } elseif (!preg_match('/^8801[3-9]\d{8}$/', $student_number)) {
+        // Invalid phone number format
+        echo json_encode(['success' => false, 'message' => 'Invalid phone number format.']);
+        exit;
+    }
 try {
     // Check if the student exists
     $stmt = $conn->prepare("SELECT student_id, student_name FROM students WHERE student_number = ?");

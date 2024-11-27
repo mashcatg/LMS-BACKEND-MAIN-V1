@@ -35,7 +35,7 @@ if (isset($_FILES['course_banner'])) {
         $file_tmp_path = $_FILES['course_banner']['tmp_name'];
         $file_name = preg_replace('/[^A-Za-z0-9_\-\.]/', '', basename($_FILES['course_banner']['name'])); // Sanitize filename
         $file_store_path = "../uploads/" . $file_name; // Change this path as needed
-
+        $filePathToSave = 'http://lms.ennovat.com/lms-admin/uploads/'.basename($file_name);
         // Move the uploaded file to the desired directory
         if (move_uploaded_file($file_tmp_path, $file_store_path)) {
             $file_address = $file_store_path; // Save the file address
@@ -71,7 +71,7 @@ $time = date('Y-m-d H:i:s');  // Current timestamp for "time"
 try {
     // Insert the new course into the database
     $stmt = $conn->prepare("INSERT INTO courses (course_name, course_banner, course_description, fee_type, course_fee, discounted_amount, active_months, accepting_admission, service_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
-    $stmt->execute([$course_name, $file_name, $course_description, $fee_type, $course_fee, $discounted_amount, $active_months, $accepting_admission, $service_id]);
+    $stmt->execute([$course_name, $filePathToSave, $course_description, $fee_type, $course_fee, $discounted_amount, $active_months, $accepting_admission, $service_id]);
 
     // Return success response with the newly created course
     echo json_encode([

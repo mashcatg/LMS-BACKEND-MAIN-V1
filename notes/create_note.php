@@ -38,15 +38,16 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $file_tmp_path = $_FILES['file_address']['tmp_name'];
             $file_name = $_FILES['file_address']['name'];
             $file_store_path = "../uploads/" . basename($file_name); // Change this path as needed
+            $filePathToSave = 'http://lms.ennovat.com/lms-admin/uploads/'.basename($file_name);
 
             // Move the uploaded file to the desired directory
             if (move_uploaded_file($file_tmp_path, $file_store_path)) {
                 $file_address = $file_store_path;
 
                 // Prepare insert statement
-                $stmt = $conn->prepare("INSERT INTO notes (note_name, file_address, note_tags, course_id, batch_id, created_by, created_at, service_id) VALUES (:note_name, :file_address, :note_tags, :course_ids, :batch_ids, :created_by, :created_at, :service_id)");
+                $stmt = $conn->prepare("INSERT INTO notes (note_name, file_address, note_tags, course_id, batch_id, created_by, created_at, service_id) VALUES (:note_name, :filePathToSave, :note_tags, :course_ids, :batch_ids, :created_by, :created_at, :service_id)");
                 $stmt->bindParam(':note_name', $note_name);
-                $stmt->bindParam(':file_address', $file_address);
+                $stmt->bindParam(':filePathToSave', $filePathToSave);
                 $stmt->bindParam(':note_tags', $note_tags);
                 $stmt->bindParam(':course_ids', $course_ids);
                 $stmt->bindParam(':batch_ids', $batch_ids);

@@ -25,7 +25,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $batch_id = $input['batch_id'];
     $batch_name = $input['batch_name'];
     $course_id = $input['course_id'];
-    $branch_id = $input['branch_id'];
+    $branch_id = (int) $input['branch_id']; 
     $accepting_admission = $input['accepting_admission'];
 
     try {
