@@ -42,7 +42,18 @@ if (!$service_id) {
     echo json_encode(['success' => false, 'message' => 'Service ID is missing or invalid.']);
     exit();
 }
-
+// Normalize phone number
+    if (preg_match('/^01[3-9]\d{8}$/', $student_number)) {
+        // Phone starts with '01'
+        $student_number = '88' . $student_number;
+    } elseif (preg_match('/^1\d{10}$/', $student_number)) {
+        // Phone starts with '1'
+        $student_number = '880' . substr($student_number, 1); // Remove the '1' and prepend '880'
+    } elseif (!preg_match('/^8801[3-9]\d{8}$/', $student_number)) {
+        // Invalid phone number format
+        echo json_encode(['success' => false, 'message' => 'Invalid phone number format.']);
+        exit;
+    }
 try {
     // Fetch student and OTP details
     $stmt = $conn->prepare("SELECT student_id, student_otp, student_otp_expiry_time, student_password FROM students WHERE student_number = ? AND service_id = ?");
