@@ -15,7 +15,7 @@ session_start();
 // Perform logout
 session_unset();
 session_destroy();
-setcookie("admin_token", "", time() - 3600, "/", "", false, true);  
+setcookie("student_auth", "", time() - 3600, "/", "", false, true);  
 
 echo json_encode(["status" => "success", "message" => "Logout successful"]);
 ?>
