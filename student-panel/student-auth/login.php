@@ -43,7 +43,8 @@ if (empty($student_number) || empty($student_password)) {
     echo json_encode(['success' => false, 'message' => 'Student phone number or password is missing.']);
     exit();
 }
-
+// Validate phone number
+$student_number = validatePhoneNumber($student_number);
 try {
     // Check if the student exists in the database
     $stmt = $conn->prepare("SELECT student_id, student_password, service_id FROM students WHERE student_number = ? AND service_id = ?");
@@ -84,13 +85,12 @@ try {
     setcookie('student_auth', $auth_token['service_id'], [
             'expires' => time() + (180 * 24 * 60 * 60),  // 180 days
             'path' => '/',                              // Available site-wide
-            'domain' => '.youthsthought.com',            // Valid for subdomains of youthsthought.com
+            'domain' => '.ennovat.com',            // Valid for subdomains of youthsthought.com
             'secure' => true,                           // Secure only over HTTPS
             'httponly' => true,                         // Make it inaccessible to JavaScript
             'samesite' => 'None'                        // Allow cross-site cookie usage
         ]);
-    setcookie('student_auth', $auth_token, time() + (180 * 24 * 60 * 60), '/', 'localhost', false, true);
-    
+    setcookie("student_auth", $auth_token, time() + (180 * 24 * 60 * 60), "/", "", false, true);
     // Fetch additional enrollment information
     $stmt = $conn->prepare("
         SELECT enrollment_id, student_index FROM enrollments WHERE service_id = ? AND student_id = ?
@@ -115,5 +115,25 @@ try {
     // Handle errors gracefully
     echo json_encode(['success' => false, 'message' => 'Error during login: ' . $e->getMessage()]);
     exit();
+}
+    // Function to validate phone numbers
+function validatePhoneNumber($number) {
+    // Remove any non-numeric characters
+    $number = preg_replace('/[^0-9]/', '', $number);
+    
+    if (strlen($number) === 0) {
+        return false; // Empty number
+    }
+
+    // Check the prefix and adjust accordingly
+    if (substr($number, 0, 4) === '8801' && strlen($number) === 13) {
+        return $number; // Valid format, return as is
+    } elseif (substr($number, 0, 2) === '01' && strlen($number) === 11) {
+        return '880' . substr($number, 1); // Add '88' before the number
+    } elseif (substr($number, 0, 1) === '1' && strlen($number) === 10) {
+        return '880' . $number; // Add '880' before the number
+    } else {
+        return false; // Invalid format
+    }
 }
 ?>
