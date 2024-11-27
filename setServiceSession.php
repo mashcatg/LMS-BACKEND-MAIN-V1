@@ -13,15 +13,6 @@ header("Access-Control-Allow-Credentials: true");
 if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
     exit(0);
 }
-session_set_cookie_params([
-    'lifetime' => 180 * 24 * 60 * 60, // 180 days
-    'path' => '/',                     // Available site-wide
-    'domain' => '.ennovat.com',   //valid for subdomains
-    'secure' => true,                  // Secure only over HTTPS
-    'httponly' => true,                // Make the cookie inaccessible to JavaScript
-    'samesite' => 'None',              // Allow cross-site cookie usage
-]);
-
 // Start the session after setting cookie parameters
 session_start();
 include 'db.php';
@@ -61,17 +52,7 @@ try {
     if ($service && isset($service['service_id'])) {
         // Save the service ID in the session
         $_SESSION['service_id'] = $service['service_id'];
-
-        // Set the service_id cookie with necessary attributes
-        setcookie('service_id', $service['service_id'], [
-            'expires' => time() + (180 * 24 * 60 * 60),  // 180 days
-            'path' => '/',                              // Available site-wide
-            'domain' => '.ennovat.com',            // Valid for subdomains of youthsthought.com
-            'secure' => true,                           // Secure only over HTTPS
-            'httponly' => true,                         // Make it inaccessible to JavaScript
-            'samesite' => 'None'                        // Allow cross-site cookie usage
-        ]);
-
+setcookie('service_id', $service['service_id'], time() + (180 * 24 * 60 * 60), '/', '', false, true);
         echo json_encode([
             'url' => $currentUrl,
             'subdomain' => $subdomain,
