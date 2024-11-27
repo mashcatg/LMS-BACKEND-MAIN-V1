@@ -13,14 +13,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
     http_response_code(200);
     exit(0);
 }
-session_set_cookie_params([
-    'lifetime' => 180 * 24 * 60 * 60, // 180 days
-    'path' => '/',                     // Available site-wide
-    'domain' => '.ennovat.com',   // Valid for subdomains of youthsthought.com
-    'secure' => true,                  // Secure only over HTTPS
-    'httponly' => true,                // Make the cookie inaccessible to JavaScript
-    'samesite' => 'None',              // Allow cross-site cookie usage
-]);
+
 session_start();
 include '../../db.php';
 
@@ -89,15 +82,8 @@ try {
     ");
     $stmt->execute([$student['student_id'], $auth_token, $expiry_date, $service_id]);
 
-    setcookie('student_auth', $auth_token, [
-            'expires' => time() + (180 * 24 * 60 * 60),  // 180 days
-            'path' => '/',                              // Available site-wide
-            'domain' => '.ennovat.com',            // Valid for subdomains of youthsthought.com
-            'secure' => true,                           // Secure only over HTTPS
-            'httponly' => true,                         // Make it inaccessible to JavaScript
-            'samesite' => 'None'                        // Allow cross-site cookie usage
-        ]);
-    setcookie('student_auth', $auth_token, time() + (180 * 24 * 60 * 60), '/', '', false, true);  // Set cookie for localhost
+    
+    setcookie('student_auth', $auth_token, time() + (180 * 24 * 60 * 60), '/', '', false, true);
 
     // Fetch additional enrollment information
     $stmt = $conn->prepare("
