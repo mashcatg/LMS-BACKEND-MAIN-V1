@@ -56,7 +56,7 @@ try {
         'success' => true,
         'message' => "Admin added successfully",
         'password' => $admin_password,
-        // 'smsResponse' => json_decode($smsResponse, true) // Decode to include in response
+        'smsResponse' => json_decode($smsResponse, true) // Decode to include in response
     ]);
 
 } catch (PDOException $e) {
