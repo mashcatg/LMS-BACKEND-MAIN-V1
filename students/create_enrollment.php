@@ -36,7 +36,7 @@ $discounted_amount = $data['discounted_amount'] ?? null;
 $payment_method = 'offline';
 
 // Ensure all required fields are present
-if (!$student_number || !$student_index || !$course_id || !$batch_id || !$paid_amount || !$course_fee || !$discounted_amount) {
+if (!$student_number || !$student_index || !$course_id || !$paid_amount || !$course_fee || !$discounted_amount) {
     echo json_encode(['success' => false, 'message' => 'Missing required fields']);
     exit();
 }
