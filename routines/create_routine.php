@@ -30,7 +30,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     try {
         $routine_name = $_POST['routine_name'];
         $course_id = $_POST['course_id']; // Assume single course for simplicity
-        $batch_id = $_POST['batch_id']; // Assume single batch for simplicity
+        $batch_id = $_POST['batch_id'] ? ''; // Assume single batch for simplicity
         $created_by = $_SESSION['admin_id']; // Current user ID
         $created_at = date('Y-m-d H:i:s');
 
