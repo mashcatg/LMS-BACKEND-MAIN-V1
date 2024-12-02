@@ -24,14 +24,20 @@ if (empty($course_id)) {
 }
 
 try {
-    // Prepare the SQL query to fetch playlists that have the course_id in their course_id field (comma-separated list)
+    // Prepare the SQL query to fetch playlists with aggregated data
     $stmt = $conn->prepare("
-        SELECT playlists.*, courses.course_name 
+        SELECT 
+            playlists.playlist_id, 
+            playlists.playlist_name, 
+            playlists.description, 
+            playlists.course_id, 
+            playlists.service_id, 
+            GROUP_CONCAT(courses.course_name SEPARATOR ', ') AS course_names
         FROM playlists
         INNER JOIN courses ON FIND_IN_SET(courses.course_id, playlists.course_id) > 0
         WHERE playlists.service_id = :service_id
         AND FIND_IN_SET(:course_id, playlists.course_id) > 0
-        GROUP BY playlists.playlist_id
+        GROUP BY playlists.playlist_id, playlists.playlist_name, playlists.description, playlists.course_id, playlists.service_id
     ");
     
     // Execute the query with the course_id and service_id from the session

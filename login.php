@@ -91,7 +91,7 @@ function validatePhoneNumber($number) {
     if (substr($number, 0, 4) === '8801' && strlen($number) === 13) {
         return $number; // Valid format, return as is
     } elseif (substr($number, 0, 2) === '01' && strlen($number) === 11) {
-        return '880' . substr($number, 1); // Add '88' before the number
+        return '88' . substr($number, 1); // Add '88' before the number
     } elseif (substr($number, 0, 1) === '1' && strlen($number) === 10) {
         return '880' . $number; // Add '880' before the number
     } else {

@@ -6,9 +6,9 @@ function calculateSmsCost($text, $numbers, $sms_type) {
     global $conn;
 
     // Ensure the text only contains English characters
-    if (!preg_match('/^[a-zA-Z0-9\s.,?!\'"-]+$/', $text)) {
-        return json_encode(['error' => "The SMS must contain only English characters and can include numbers and punctuation."]);
-    }
+    // if (!preg_match('/^[a-zA-Z0-9\s.,?!\'"-]+$/', $text)) {
+    //     return json_encode(['error' => "The SMS must contain only English characters and can include numbers and punctuation."]);
+    // }
 
     // Split the numbers by comma
     $numberArray = explode(',', $numbers);

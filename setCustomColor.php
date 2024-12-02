@@ -74,7 +74,7 @@ try {
     }, $colors);
 
     // Return colors as a JSON response
-    echo json_encode(['colors' => $colors]);
+    echo json_encode(['success' => true, 'colors' => $colors]);
 } catch (Exception $e) {
     echo json_encode(['success' => false, 'message' => 'Error fetching colors: ' . $e->getMessage()]);
 }

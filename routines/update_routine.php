@@ -28,11 +28,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $routine_id = $_GET['routine_id'] ?? null;
     $routine_name = $_POST['routine_name'] ?? '';
     $course_ids = $_POST['course_id'] ?? ''; 
-    $batch_ids = $_POST['batch_id'] ?? '';  
+    $batch_ids = $_POST['batch_id'] ?? null;  
     $file_address = null; 
 
     // Validate required fields
-    if (empty($routine_id) || empty($routine_name) || empty($course_ids) || empty($batch_ids)) {
+    if (empty($routine_id) || empty($routine_name) || empty($course_ids)) {
         echo json_encode(['success' => false, 'message' => 'All fields are required.']);
         exit();
     }

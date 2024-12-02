@@ -29,7 +29,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $note_name = $_POST['note_name'];
         $note_tags = $_POST['note_tags'];
         $course_ids = $_POST['course_id'];
-        $batch_ids = $_POST['batch_id'];
+        $batch_ids = $_POST['batch_id'] ?? null;
         $created_by = $_SESSION['admin_id']; // Assuming this is the current user ID
         $created_at = date('Y-m-d H:i:s');
 
