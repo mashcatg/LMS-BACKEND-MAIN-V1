@@ -105,7 +105,7 @@ function sendDueSms($response, $serviceId, $conn) {
         $student_name = $data['student_name'];
         $due_amount = $data['due_amount'];
         
-        $message = "Hi $student_name, you have a due amount of $due_amount.";
+        $message = "Hi $student_name, you have a due amount of $due_amount. Please pay the due soon. Thank You.";
         $sms_numbers[] = [
             'to' => $student_number,
             'message' => $message
@@ -121,7 +121,7 @@ function sendDueSms($response, $serviceId, $conn) {
     // Filter SMS messages based on valid numbers
     $validSmsNumbers = array_filter($sms_numbers, function($sms) use ($validNumbers) {
         return in_array($sms['to'], $validNumbers);
-    });
+    });    
 
     // Send SMS only if there are valid numbers
     if (!empty($validSmsNumbers)) {
@@ -209,14 +209,22 @@ function validateAndFormatNumbers($numberArray) {
         $number = preg_replace('/[^0-9]/', '', $number);
 
         // Ensure the number starts with '8801' and is 13 digits long
-        if (substr($number, 0, 4) !== '8801') {
+        if (substr($number, 0, 4) !== '8801' && strlen($number) === 13) {
             if (strlen($number) === 11 && substr($number, 0, 2) === '01') {
                 // Prepend '880' if it starts with '01'
-                $number = '88' . $number;
+                $number = '880' . $number;
             } elseif (strlen($number) === 10 && substr($number, 0, 1) === '0') {
                 // If it starts with '0', convert to '8801'
                 $number = '88' . substr($number, 1);
             } else {
                 continue; // Skip this number
-           
-            }}}}
+            }
+        }
+
+        // Add valid number to the array
+        $validNumbers[] = $number;
+    }
+
+    // Ensure it's always an array before returning
+    return is_array($validNumbers) ? $validNumbers : [];
+}

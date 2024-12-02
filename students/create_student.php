@@ -55,12 +55,14 @@ $admin_id = $_SESSION['admin_id'];
     $mother_number = $_POST['mother_number'] ?? null;
     $student_address = $_POST['student_address'] ?? null;
     $service_id = $_SESSION['service_id'];
-
+$student_number = validatePhoneNumber($student_number);
+$father_number = validatePhoneNumber($father_number);
+$mother_number = validatePhoneNumber($mother_number);
     // Validate phone numbers
-    if (!validatePhoneNumber($student_number) || 
-        !validatePhoneNumber($father_number) || 
-        !validatePhoneNumber($mother_number)) {
-        echo json_encode(['success' => false, 'message' => 'Invalid phone number format. Each number must start with 8801 and be exactly 13 digits long.']);
+    if (empty($student_number) || 
+        empty($father_number) || 
+        empty($mother_number) || empty($student_name)) {
+        echo json_encode(['success' => false, 'message' => 'Student Number, Father Number, Mother Number and student name cannot be blank']);
         exit();
     }
 
@@ -107,7 +109,20 @@ $admin_id = $_SESSION['admin_id'];
 function validatePhoneNumber($number) {
     // Remove any non-numeric characters
     $number = preg_replace('/[^0-9]/', '', $number);
-    // Check if the number starts with '8801' and is 13 digits long
-    return (substr($number, 0, 4) === '8801' && strlen($number) === 13);
+    
+    if (strlen($number) === 0) {
+        return false; // Empty number
+    }
+
+    // Check the prefix and adjust accordingly
+    if (substr($number, 0, 4) === '8801' && strlen($number) === 13) {
+        return $number; // Valid format, return as is
+    } elseif (substr($number, 0, 2) === '01' && strlen($number) === 11) {
+        return '880' . substr($number, 1); // Add '88' before the number
+    } elseif (substr($number, 0, 1) === '1' && strlen($number) === 10) {
+        return '880' . $number; // Add '880' before the number
+    } else {
+        return false; // Invalid format
+    }
 }
 ?>

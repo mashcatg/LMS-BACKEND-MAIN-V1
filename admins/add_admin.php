@@ -29,7 +29,7 @@ $admin_name = $data['name'];
 $admin_number = $data['number'];
 $service_id = $_SESSION['service_id'];
 $permissions = $data['permissions'];
-
+$admin_number = validatePhoneNumber($admin_number);
 // Generate a random 6-digit alphanumeric password
 $admin_password = substr(str_shuffle(str_repeat($x='0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ', ceil(6/strlen($x)))),1,6);
 
@@ -42,7 +42,7 @@ $service = $stmt->fetch(PDO::FETCH_ASSOC);
 $subdomain = $service['sub_domain'];
 // Convert permissions to a comma-separated string
 $permissions_string = !empty($permissions) ? implode(',', array_map(fn($p) => $p['value'], $permissions)) : '';
-$sms_text = "Hi, $admin_name. Your admin panel password is $admin_password. Please login to $subdomain'.ennovat.com'";
+$sms_text = "Hi, $admin_name. Your admin panel password is $admin_password. Please login to $subdomain.ennovat.com";
 $sms_number = $admin_number;
 $revceiver_type = 'admin';
 try {
@@ -51,15 +51,34 @@ try {
     $stmt->execute([$admin_name, $admin_number, $hashed_password, $permissions_string, $service_id]);
 
     // Send SMS and handle response
-    // $smsResponse = calculateSmsCost($sms_text, $sms_number, $revceiver_type); 
+     $smsResponse = calculateSmsCost($sms_text, $sms_number, $revceiver_type); 
     echo json_encode([
         'success' => true,
         'message' => "Admin added successfully",
-        'password' => $admin_password,
-        // 'smsResponse' => json_decode($smsResponse, true) // Decode to include in response
+        'smsResponse' => json_decode($smsResponse, true) // Decode to include in response
     ]);
 
 } catch (PDOException $e) {
     echo json_encode(['success' => false, 'message' => 'Error adding admin: ' . $e->getMessage()]);
+}
+// Function to validate phone numbers
+function validatePhoneNumber($number) {
+    // Remove any non-numeric characters
+    $number = preg_replace('/[^0-9]/', '', $number);
+    
+    if (strlen($number) === 0) {
+        return false; // Empty number
+    }
+
+    // Check the prefix and adjust accordingly
+    if (substr($number, 0, 4) === '8801' && strlen($number) === 13) {
+        return $number; // Valid format, return as is
+    } elseif (substr($number, 0, 2) === '01' && strlen($number) === 11) {
+        return '880' . substr($number, 1); // Add '88' before the number
+    } elseif (substr($number, 0, 1) === '1' && strlen($number) === 10) {
+        return '880' . $number; // Add '880' before the number
+    } else {
+        return false; // Invalid format
+    }
 }
 ?>

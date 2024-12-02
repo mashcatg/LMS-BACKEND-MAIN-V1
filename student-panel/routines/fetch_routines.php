@@ -18,7 +18,7 @@ if ($checkAuthMessage != 'success') {
 $service_id = $_SESSION['service_id'] ?? '61545';
 
 try {
-    $stmt = $conn->prepare("SELECT * FROM routines WHERE service_id = :service_id");
+    $stmt = $conn->prepare("SELECT * FROM routine WHERE service_id = :service_id");
     $stmt->bindParam(':service_id', $service_id, PDO::PARAM_INT);
     $stmt->execute();
     $routines = $stmt->fetchAll(PDO::FETCH_ASSOC);

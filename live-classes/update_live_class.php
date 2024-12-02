@@ -20,9 +20,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $live_class_name = $_POST['live_class_name'] ?? '';
     $live_class_desc = $_POST['live_class_desc'] ?? '';
     $course_ids = $_POST['course_id'] ?? '';
-    $batch_ids = $_POST['batch_id'] ?? '';
+    $batch_ids = $_POST['batch_id'] ?? null;
 
-    if (empty($live_class_id) || empty($live_class_name) || empty($course_ids) || empty($batch_ids)) {
+    if (empty($live_class_id) || empty($live_class_name) || empty($course_ids)) {
         echo json_encode(['success' => false, 'message' => 'All fields are required.']);
         exit();
     }
