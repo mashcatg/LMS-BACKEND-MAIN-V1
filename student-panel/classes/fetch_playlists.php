@@ -15,8 +15,8 @@ if ($checkAuthMessage != 'success') {
     exit();
 }
 
-$service_id = $_SESSION['service_id'] ?? '61545';
-$course_id = $_SESSION['course_id'] ?? '1';
+$service_id = $_SESSION['service_id'] ;
+$course_id = $_SESSION['course_id'];
 
 if (empty($course_id)) {
     echo json_encode(['error' => 'No Course Selected']);

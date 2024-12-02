@@ -25,8 +25,8 @@ if (empty($data['quiz_id'])) {
 }
 
 $quiz_id = $data['quiz_id'];
-$enrollment_id = $_SESSION['enrollment_id'] ?? '1'; // Default to 1 for testing
-$service_id = $_SESSION['service_id'] ?? '61545'; // Default service_id for testing
+$enrollment_id = $_SESSION['enrollment_id']; // Default to 1 for testing
+$service_id = $_SESSION['service_id'] ; // Default service_id for testing
 $answers = $data['answers'];
 
 // Generate a unique form ID

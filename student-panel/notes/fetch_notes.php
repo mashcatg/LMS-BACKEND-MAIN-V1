@@ -21,8 +21,8 @@ if ($checkAuthMessage != 'success') {
 //     exit();
 // }
 
-$service_id = $_SESSION['service_id'] ?? '61545';
-$course_id = $_SESSION['course_id'] ?? '1';
+$service_id = $_SESSION['service_id'] ;
+$course_id = $_SESSION['course_id'];
 $batch_id = $_SESSION['batch_id'] ?? '1';
 
 try {

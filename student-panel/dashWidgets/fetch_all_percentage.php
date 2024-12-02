@@ -15,9 +15,9 @@ if ($checkAuthMessage != 'success') {
     exit();
 }
 
-$service_id = $_SESSION['service_id'] ?? '61545';
-$course_id = $_SESSION['course_id'] ?? '1'; // Get course ID from session or default to 1
-$student_index = $_SESSION['student_index'] ?? '1234'; // For testing, replace with real session data
+$service_id = $_SESSION['service_id'] ;
+$course_id = $_SESSION['course_id']; // Get course ID from session or default to 1
+$student_index = $_SESSION['student_index']; // For testing, replace with real session data
 
 if (!$student_index) {
     echo json_encode(['error' => 'Student index not found']);

@@ -21,7 +21,7 @@ function calculateSmsCost($text, $numbers, $sms_type) {
         return json_encode(['error' => "The SMS length exceeds the maximum limit of 440 characters."]);
     }
 
-    $serviceId = $_SESSION['service_id'] ?? 61545;
+    $serviceId = $_SESSION['service_id'];
     list($fetchCredits, $company_name) = fetchSmsCredits($serviceId, $conn);
 
     if ($fetchCredits === false || $fetchCredits < $totalSms) {

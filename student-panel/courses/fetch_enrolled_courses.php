@@ -16,7 +16,7 @@ if ($checkAuthMessage != 'success') {
     exit();
 }
 
-$service_id = $_SESSION['service_id'] ?? '61545';
+$service_id = $_SESSION['service_id'] ;
 $student_id = $_SESSION['student_id'] ?? '1';
 
 try {

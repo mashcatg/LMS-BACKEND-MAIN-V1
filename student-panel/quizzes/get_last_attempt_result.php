@@ -18,8 +18,8 @@ if ($checkAuthMessage != 'success') {
 }
 
 // Get enrollment and service_id from session
-$enrollment_id = $_SESSION['enrollment_id'] ?? '1';
-$service_id = $_SESSION['service_id'] ?? '61545';
+$enrollment_id = $_SESSION['enrollment_id'];
+$service_id = $_SESSION['service_id'] ;
 $quiz_id = $_GET['quiz_id'];
 
 // Get quiz details (negative_marks, question_per_quiz, marks_per_question)

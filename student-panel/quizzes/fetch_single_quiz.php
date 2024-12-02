@@ -15,7 +15,7 @@ if ($checkAuthMessage != 'success') {
     exit();
 }
 
-$service_id = $_SESSION['service_id'] ?? '61545';  // Default service_id
+$service_id = $_SESSION['service_id'] ;  // Default service_id
 $course_id = $_SESSION['course_id'] ?? 1;         // Default course_id
 $batch_id = $_SESSION['batch_id'] ?? '1';         // Default batch_id
 $quiz_id = $_GET['quiz_id']; 

@@ -15,9 +15,9 @@ if ($checkAuthMessage != 'success') {
     exit();
 }
 
-$service_id = $_SESSION['service_id'] ?? '61545'; // Fetch service_id from session
+$service_id = $_SESSION['service_id'] ; // Fetch service_id from session
 $quiz_id = $_GET['quiz_id']; // Fetch quiz_id from GET request
-$enrollment_id = $_SESSION['enrollment_id'] ?? '1'; // Fetch enrollment_id from session (default to '1' if not set)
+$enrollment_id = $_SESSION['enrollment_id']; // Fetch enrollment_id from session (default to '1' if not set)
 
 if (!$quiz_id || !$service_id) {
     echo json_encode(['error' => 'quiz_id or service_id is missing']);

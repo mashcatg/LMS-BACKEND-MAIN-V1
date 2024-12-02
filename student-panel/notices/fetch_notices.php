@@ -18,8 +18,8 @@ if ($checkAuthMessage != 'success') {
 } 
 
 // Fallback values for service_id and enrollment_id if not set in session
-$service_id = $_SESSION['service_id'] ?? '61545';
-$enrollment_id = $_SESSION['enrollment_id'] ?? '1';
+$service_id = $_SESSION['service_id'] ;
+$enrollment_id = $_SESSION['enrollment_id'];
 
 try {
     // Prepare the SQL query with a corrected condition for 'notice_type'

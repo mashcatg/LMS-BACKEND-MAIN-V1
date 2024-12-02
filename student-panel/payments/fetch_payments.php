@@ -15,8 +15,8 @@ if ($checkAuthMessage != 'success') {
     exit();
 } 
 
-$service_id = $_SESSION['service_id'] ?? '61545';
-$enrollment_id = $_SESSION['enrollment_id'] ?? '1';
+$service_id = $_SESSION['service_id'] ;
+$enrollment_id = $_SESSION['enrollment_id'];
 try {
     $stmt = $conn->prepare("SELECT * FROM payments WHERE service_id = :service_id AND enrollment_id = :enrollment_id");
     $stmt->bindParam(':service_id', $service_id, PDO::PARAM_INT);

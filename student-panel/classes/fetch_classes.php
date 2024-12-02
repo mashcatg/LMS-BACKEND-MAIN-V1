@@ -17,7 +17,7 @@ if ($checkAuthMessage != 'success') {
 
 $student_id = $_SESSION['student_id'] ?? '1';
 $playlist_id = $_GET['id']; // Playlist ID from the URL
-$course_id = $_SESSION['course_id'] ?? '1'; // Get course_id from the session
+$course_id = $_SESSION['course_id']; // Get course_id from the session
 
 // Get the course_ids of the playlist from playlists table
 try {

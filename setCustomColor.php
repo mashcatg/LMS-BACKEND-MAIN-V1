@@ -10,7 +10,7 @@ header("Access-Control-Allow-Credentials: true");
 
 session_start();
 include 'db.php';
-$service_id = $_SESSION['service_id'] ?? 61545;
+$service_id = $_SESSION['service_id'];
 
 function hexToHsl($hex) {
     // Remove the '#' if it exists

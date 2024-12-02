@@ -15,10 +15,10 @@ if ($checkAuthMessage != 'success') {
     exit();
 }
 
-$service_id = $_SESSION['service_id'] ?? '61545';
+$service_id = $_SESSION['service_id'] ;
 $student_id = $_SESSION['student_id'] ?? '1';
-$course_id = $_SESSION['course_id'] ?? '1';
-$student_index = $_SESSION['student_index'] ?? '1234';
+$course_id = $_SESSION['course_id'];
+$student_index = $_SESSION['student_index'];
 try {
     // Query to fetch attendance data
     $stmt = $conn->prepare("

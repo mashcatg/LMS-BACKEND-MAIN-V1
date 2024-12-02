@@ -15,7 +15,7 @@ if ($checkAuthMessage != 'success') {
     exit();
 }
 
-$service_id = $_SESSION['service_id'] ?? '61545';
+$service_id = $_SESSION['service_id'] ;
 
 try {
     $stmt = $conn->prepare("SELECT * FROM routine WHERE service_id = :service_id");
