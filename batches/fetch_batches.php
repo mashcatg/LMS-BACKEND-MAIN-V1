@@ -28,7 +28,20 @@ try {
     $stmt->execute([$service_id]);
     $batches = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-    // Return batches as a JSON response
+    // Iterate through each batch and fetch the number of students enrolled
+    foreach ($batches as &$batch) {
+        $batch_id = $batch['batch_id'];
+
+        // Query to count enrollments for the current batch
+        $countStmt = $conn->prepare("SELECT COUNT(*) AS total_students FROM enrollments WHERE batch_id = ?");
+        $countStmt->execute([$batch_id]);
+        $enrollmentCount = $countStmt->fetch(PDO::FETCH_ASSOC);
+
+        // Add the total_students count to each batch
+        $batch['total_students'] = $enrollmentCount['total_students'] ?? 0;
+    }
+
+    // Return batches with the total_students count as a JSON response
     echo json_encode(['batches' => $batches]);
 } catch (Exception $e) {
     echo json_encode(['success' => false, 'message' => 'Error fetching batches: ' . $e->getMessage()]);

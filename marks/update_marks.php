@@ -31,7 +31,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $service_id = $_SESSION['service_id'];
     // Validate and sanitize input
     $exam_id = isset($data['exam_id']) ? intval($data['exam_id']) : 0;
-    $mark_id = isset($_GET['mark_id']) ? intval($_GET['mark_id']) : 0; // Keep this for reference but don't use it for checking
+    $mark_id = isset($_GET['mark_id']) ? intval($_GET['mark_id']) : 0;
     $student_index = isset($data['student_index']) ? htmlspecialchars(trim($data['student_index'])) : '';
     $mcq_marks = isset($data['mcq_marks']) ? floatval($data['mcq_marks']) : 0.0;
     $cq_marks = isset($data['cq_marks']) ? floatval($data['cq_marks']) : 0.0;

@@ -15,7 +15,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $live_class_name = $_POST['live_class_name'] ?? '';
     $live_class_desc = $_POST['live_class_desc'] ?? '';
     $course_ids = $_POST['course_id'] ?? '';
-    $batch_ids = $_POST['batch_id'] ?? '';
+    $batch_ids = $_POST['batch_id'] ?? null;
     $service_id = $_SESSION['service_id'] ?? null; // Assuming the service_id is stored in session
 
     if (empty($live_class_name) || empty($course_ids) || empty($batch_ids)) {

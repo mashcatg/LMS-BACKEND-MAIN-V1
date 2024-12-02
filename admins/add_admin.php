@@ -42,7 +42,7 @@ $service = $stmt->fetch(PDO::FETCH_ASSOC);
 $subdomain = $service['sub_domain'];
 // Convert permissions to a comma-separated string
 $permissions_string = !empty($permissions) ? implode(',', array_map(fn($p) => $p['value'], $permissions)) : '';
-$sms_text = "Hi, $admin_name. Your admin panel password is $admin_password. Please login to $subdomain'.ennovat.com'";
+$sms_text = "Hi, $admin_name. Your admin panel password is $admin_password. Please login to $subdomain.ennovat.com";
 $sms_number = $admin_number;
 $revceiver_type = 'admin';
 try {
@@ -51,12 +51,11 @@ try {
     $stmt->execute([$admin_name, $admin_number, $hashed_password, $permissions_string, $service_id]);
 
     // Send SMS and handle response
-    // $smsResponse = calculateSmsCost($sms_text, $sms_number, $revceiver_type); 
+     $smsResponse = calculateSmsCost($sms_text, $sms_number, $revceiver_type); 
     echo json_encode([
         'success' => true,
         'message' => "Admin added successfully",
-        'password' => $admin_password,
-        // 'smsResponse' => json_decode($smsResponse, true) // Decode to include in response
+        'smsResponse' => json_decode($smsResponse, true) // Decode to include in response
     ]);
 
 } catch (PDOException $e) {
