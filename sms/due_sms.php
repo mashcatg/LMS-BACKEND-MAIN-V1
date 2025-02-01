@@ -11,7 +11,7 @@ header("Access-Control-Allow-Headers: Content-Type, Authorization");
 header("Access-Control-Allow-Credentials: true");
 
 include '../check_auth_backend.php';
-include '../students/due_count.php'; // Include your due calculation logic
+include '../students/due_count.php'; 
 
 // Ensure that authentication is successful
 if ($checkAuthMessage != 'success') {
