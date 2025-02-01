@@ -87,9 +87,9 @@ function fetchSmsCredits($serviceId, $conn) {
 
 function sms_send($textInput, $number, $totalSms, $serviceId, $sms_type) {
     global $conn;
-    $url = "http://bulksmsbd.net/api/smsapi";
-    $api_key = "x6Cup2Oa7raosVD4kt29"; // Your API key
-    $senderid = "8809617612925"; // Your sender ID
+    $url = "";
+    $api_key = ""; // Your API key
+    $senderid = ""; // Your sender ID
 
     $data = [
         "api_key" => $api_key,
