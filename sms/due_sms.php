@@ -133,8 +133,8 @@ function sendDueSms($response, $serviceId, $conn) {
 // Function to send SMS to multiple recipients
 function sms_send($messages, $totalSms, $serviceId, $conn) {
     $url = "http://bulksmsbd.net/api/smsapimany";
-    $api_key = "x6Cup2Oa7raosVD4kt29"; // Replace with your actual API key
-    $senderid = "8809617612925"; // Replace with your actual sender ID
+    $api_key = ""; // Replace with your actual API key
+    $senderid = ""; // Replace with your actual sender ID
 
     $data = [
         "api_key" => $api_key,
